@@ -22,7 +22,9 @@ class NextcloudResponse
 
     /**
      * NextcloudResponse constructor.
+     *
      * @param ResponseInterface $response
+     *
      * @throws NCException
      */
     public function __construct(ResponseInterface $response)
@@ -31,12 +33,16 @@ class NextcloudResponse
 
         try {
             $this->body = new \SimpleXMLElement($response->getContent());
-        } catch (\Exception $e) {
-            throw new NCException($response, "Failed parsing response");
         } catch (ClientExceptionInterface $e) {
+            throw new NCException($response, "Client Error: ".$e->getMessage());
         } catch (RedirectionExceptionInterface $e) {
+            throw new NCException($response, "Redirect Error: ".$e->getMessage());
         } catch (ServerExceptionInterface $e) {
+            throw new NCException($response, "Server Error: ".$e->getMessage());
         } catch (TransportExceptionInterface $e) {
+            throw new NCException($response, "Transport Error: ".$e->getMessage());
+        } catch (\Exception $e) {
+            throw new NCException($response, "Failed parsing response: ".$e->getMessage());
         }
     }
 
@@ -95,13 +101,20 @@ class NextcloudResponse
     /**
      * @param \SimpleXMLElement $xml
      * @param array $out
+     *
      * @return array
      */
     protected function xml2array(\SimpleXMLElement $xml, $out = [])
     {
 
         foreach ((array)$xml as $index => $node) {
-            $out[$index] = $node instanceof \SimpleXMLElement ? $this->xml2array($node) : $node;
+            if (is_array($node)) {
+                foreach ($node as $index2 => $node2) {
+                    $out[$index][$index2] = $node2 instanceof \SimpleXMLElement ? $this->xml2array($node2) : $node2;
+                }
+            } else {
+                $out[$index] = $node instanceof \SimpleXMLElement ? $this->xml2array($node) : $node;
+            }
         }
 
         return $out;

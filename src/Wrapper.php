@@ -90,8 +90,14 @@ class Wrapper
         return $this->getClient(GroupFoldersClient::class);
     }
 
+    public function getCapabilities()
+    {
+        return $this->connection->submitRequest('GET', 'v2.php/cloud/capabilities', []);
+    }
+
     /**
      * @param $class
+     *
      * @return mixed
      */
     protected function getClient($class)

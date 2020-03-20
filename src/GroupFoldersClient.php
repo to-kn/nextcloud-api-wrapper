@@ -2,7 +2,6 @@
 
 namespace NextcloudApiWrapper;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class GroupFoldersClient extends AbstractClient
@@ -21,8 +20,10 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Adds a GroupFolder
+     *
      * @param $username
      * @param $password
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
@@ -41,33 +42,24 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Gets a list of GroupFolders
+     *
      * @param array $params
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
      */
-    public function listFolders(array $params = [])
+    public function listFolders()
     {
 
-        $params = $this->resolve(
-            $params,
-            function (OptionsResolver $resolver) {
-                $resolver->setDefaults(
-                    [
-                        'search',
-                        'limit',
-                        'offset',
-                    ]
-                );
-            }
-        );
-
-        return $this->connection->request(Connection::GET, self::FOLDER_PART.$this->buildUriParams($params));
+        return $this->connection->request(Connection::GET, self::FOLDER_PART);
     }
 
     /**
      * Gets data about a given Folder
+     *
      * @param $folderId
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
@@ -79,8 +71,10 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Updates a Mountpoint for an Folder
+     *
      * @param $folderId
      * @param $mountPoint
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
@@ -99,7 +93,9 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Deletes a folder
+     *
      * @param $folderId
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
@@ -112,8 +108,10 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Adds a group to a folder
+     *
      * @param $folderId
      * @param $groupId
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
@@ -132,8 +130,10 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Remove a group from a folder
+     *
      * @param $folderId
      * @param $groupId
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
@@ -150,9 +150,11 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Sett Permissions a group has on a Folder
+     *
      * @param $folderId
      * @param $groupId
      * @param $permissions
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
@@ -171,8 +173,10 @@ class GroupFoldersClient extends AbstractClient
 
     /**
      * Sett Permissions a group has on a Folder
+     *
      * @param $folderId
      * @param $quota
+     *
      * @return NextcloudResponse
      * @throws NCException
      * @throws TransportExceptionInterface
