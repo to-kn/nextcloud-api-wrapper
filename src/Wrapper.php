@@ -12,23 +12,26 @@ class Wrapper
     /**
      * @var AbstractClient
      */
-    protected $clients  = [];
+    protected $clients = [];
 
     private function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    public static function build($baseUri, $username, $password) {
+    public static function build($baseUri, $username, $password, $version = 18)
+    {
 
         $connection = new Connection($baseUri, $username, $password);
+
         return new Wrapper($connection);
     }
 
     /**
      * @return Connection
      */
-    public function getConnection() {
+    public function getConnection()
+    {
 
         return $this->connection;
     }
@@ -36,7 +39,8 @@ class Wrapper
     /**
      * @return AppsClient
      */
-    public function getAppsClient() {
+    public function getAppsClient()
+    {
 
         return $this->getClient(AppsClient::class);
     }
@@ -44,7 +48,8 @@ class Wrapper
     /**
      * @return FederatedCloudSharesClient
      */
-    public function getFederatedCloudSharesClient() {
+    public function getFederatedCloudSharesClient()
+    {
 
         return $this->getClient(FederatedCloudSharesClient::class);
     }
@@ -52,7 +57,8 @@ class Wrapper
     /**
      * @return GroupsClient
      */
-    public function getGroupsClient() {
+    public function getGroupsClient()
+    {
 
         return $this->getClient(GroupsClient::class);
     }
@@ -60,7 +66,8 @@ class Wrapper
     /**
      * @return SharesClient
      */
-    public function getSharesClient() {
+    public function getSharesClient()
+    {
 
         return $this->getClient(SharesClient::class);
     }
@@ -68,7 +75,8 @@ class Wrapper
     /**
      * @return UsersClient
      */
-    public function getUsersClient() {
+    public function getUsersClient()
+    {
 
         return $this->getClient(UsersClient::class);
     }
@@ -77,10 +85,12 @@ class Wrapper
      * @param $class
      * @return mixed
      */
-    protected function getClient($class) {
+    protected function getClient($class)
+    {
 
-        if(!isset($this->clients[$class]))
+        if (!isset($this->clients[$class])) {
             $this->clients[$class] = new $class($this->connection);
+        }
 
         return $this->clients[$class];
     }

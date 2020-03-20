@@ -22,10 +22,12 @@ abstract class AbstractClient
      * @param \Closure $function
      * @return array
      */
-    public function resolve(array $params, $function) {
+    public function resolve(array $params, $function)
+    {
 
-        $resolver   = new OptionsResolver();
+        $resolver = new OptionsResolver();
         $function($resolver);
+
         return $resolver->resolve($params);
     }
 
@@ -34,10 +36,12 @@ abstract class AbstractClient
      * @param $key
      * @param array $options
      */
-    public function inArray($key, array $options) {
+    public function inArray($key, array $options)
+    {
 
-        if(!in_array($key, $options))
-            throw new InvalidOptionsException("The key $key was not one of the following: " . implode(', ', $options));
+        if (!in_array($key, $options)) {
+            throw new InvalidOptionsException("The key $key was not one of the following: ".implode(', ', $options));
+        }
     }
 
     /**
@@ -45,8 +49,9 @@ abstract class AbstractClient
      * @param array $params
      * @return string
      */
-    public function buildUriParams(array $params = []) {
+    public function buildUriParams(array $params = [])
+    {
 
-        return empty($params) ? '' : '?' . http_build_query($params);
+        return empty($params) ? '' : '?'.http_build_query($params);
     }
 }

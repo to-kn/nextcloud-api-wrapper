@@ -1,8 +1,8 @@
 # Nextcloud API wrapper for PHP
 
 This is a simple php wrapper around
-- [user provisioning api](https://docs.nextcloud.com/server/12/admin_manual/configuration_user/user_provisioning_api.html)
-- [shares api](https://docs.nextcloud.com/server/12/developer_manual/core/ocs-share-api.html)
+- [user provisioning api](https://docs.nextcloud.com/server/18/admin_manual/configuration_user/user_provisioning_api.html)
+- [shares api](https://docs.nextcloud.com/server/18/developer_manual/core/ocs-share-api.html)
 
 which allows you to manage your nextcloud instance dynamically. It's meant to 
 be the closest possible to the API, every parameter is available and method names should 
@@ -20,11 +20,11 @@ to enforce it using SSL.
 ## Installation
 Install it with composer
 ```
-composer require sysmoh/nextcloud-api-wrapper
+composer require to-kn/nextcloud-api-wrapper
 ```
 
 ## Basic usage
-The library depends on Guzzle to make requests and Symfony's options resolver.
+The library depends on httpClient to make requests and Symfony's options resolver.
 ```php
 
 use NextcloudApiWrapper\Wrapper;
@@ -50,7 +50,7 @@ $response   = $userClient->getUsers();
 $code       = $response->getStatusCode();   //status code
 $users      = $response->getData();         //data as array
 $message    = $response->getStatus();       //status message
-$guzzle     = $response->getRawResponse();  //Guzzle response
+$httpClient     = $response->getRawResponse();  //httpClient response
 ```
 
 ### Making your own requests

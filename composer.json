@@ -1,20 +1,32 @@
 {
-    "name": "sysmoh/nextcloud-api-wrapper",
-    "description": "A simple wrapper around nextcloud user provisioning api",
-    "keywords": ["nextcloud", "api", "wrapper"],
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "sysmoh",
-            "email": "guillaume.hochet@gmail.com"
-        }
-    ],
-    "require": {
-        "guzzlehttp/guzzle": "^6.3",
-        "symfony/options-resolver": "^3.4"
+  "name": "to-kn/nextcloud-api-wrapper",
+  "description": "A simple wrapper around nextcloud user provisioning api",
+  "keywords": [
+    "nextcloud",
+    "api",
+    "wrapper"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "sysmoh",
+      "email": "guillaume.hochet@gmail.com"
     },
-    "autoload": {
-        "psr-4": {"NextcloudApiWrapper\\": "src/NextcloudApiWrapper"}
+    {
+      "name": "Tobias Knipping",
+      "email": "knipping@tk-schulsoftware.de"
     }
+  ],
+  "require": {
+    "php": "^7.2.5",
+    "symfony/http-client": "^4.0",
+    "symfony/options-resolver": "^4.0",
+    "ext-simplexml": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "NextcloudApiWrapper\\": "src"
+    }
+  }
 }

@@ -2,16 +2,16 @@
 
 namespace NextcloudApiWrapper;
 
-use GuzzleHttp\Psr7\Response;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class NCException extends \Exception
 {
     /**
-     * @var Response
+     * @var ResponseInterface
      */
     protected $response;
 
-    public function __construct(Response $response, $message = "", $code = 0, \Throwable $previous = null)
+    public function __construct(ResponseInterface $response, $message = "", $code = 0, \Throwable $previous = null)
     {
         $this->response = $response;
 
@@ -19,7 +19,7 @@ class NCException extends \Exception
     }
 
     /**
-     * @return Response
+     * @return ResponseInterface
      */
     public function getResponse()
     {
