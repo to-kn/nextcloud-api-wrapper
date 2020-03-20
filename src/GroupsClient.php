@@ -8,8 +8,10 @@ class GroupsClient extends AbstractClient
 
     /**
      * Search for groups
-     * @param $search
+     * @param string $search
      * @return NextcloudResponse
+     * @throws NCException
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
     public function searchGroups($search = '') {
 

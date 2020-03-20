@@ -82,6 +82,15 @@ class Wrapper
     }
 
     /**
+     * @return GroupFoldersClient
+     */
+    public function getGroupFoldersClient()
+    {
+
+        return $this->getClient(GroupFoldersClient::class);
+    }
+
+    /**
      * @param $class
      * @return mixed
      */
