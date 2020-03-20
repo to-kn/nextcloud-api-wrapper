@@ -116,7 +116,7 @@ class Connection
                 'OCS-APIRequest' => 'true',
             ],
 
-            'basic_auth' => [
+            'auth_basic' => [
                 $this->username,
                 $this->password,
             ],
